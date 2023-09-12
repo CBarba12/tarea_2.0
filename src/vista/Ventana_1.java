@@ -23,23 +23,8 @@ public class Ventana_1 extends javax.swing.JFrame {
      */
     public Ventana_1() {
         initComponents();
-        formato();
-        getVentana1_boton_actualizar().setEnabled(false);
+        
     }
-  private void formato() {
-    String []s={"Id","nombre","Gmt"};
-    modelito.setColumnIdentifiers(s);
-    Tabla_ciudad.setModel(modelito);
-    
-    
-     getVENTANA1_ComboBox_GMT().addItem("-6");
-     getVENTANA1_ComboBox_GMT().addItem("-5");
-     getVENTANA1_ComboBox_GMT().addItem("-4");
-     getVENTANA1_ComboBox_GMT().addItem("-3");
-     getVENTANA1_ComboBox_GMT().addItem("-2");
-     getVENTANA1_ComboBox_GMT().addItem("-1");
-  }
-  
   
   
     /**
@@ -185,15 +170,15 @@ public class Ventana_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Ventana1_boton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ventana1_boton_agregarActionPerformed
-//        Controlador.AGREGAR_ciudad();
+       
     }//GEN-LAST:event_Ventana1_boton_agregarActionPerformed
 
     private void Ventana1_boton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ventana1_boton_actualizarActionPerformed
-//      Controlador.actualizar();
+
     }//GEN-LAST:event_Ventana1_boton_actualizarActionPerformed
 
     private void Caja1_Bonton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Caja1_Bonton_buscarActionPerformed
-//        Controlador.busqueda_ciudad();
+
     }//GEN-LAST:event_Caja1_Bonton_buscarActionPerformed
 
     

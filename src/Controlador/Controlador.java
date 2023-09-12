@@ -478,11 +478,15 @@ public class Controlador implements ActionListener, MouseListener {
     }
 
     //---------------------------------------------------------eventos------------------------------------------------ 
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
         //primera ventana-----------------------------------------
         if (e.getSource() == ventana.getVentana1_boton_agregar()) {
+            
+            
             String Id = ventana.getVentana1_caja_ID().getText();
             String Nombre = ventana.getVentana1_nombre_CIUDAD().getText();
             String seleccion = (String) ventana.getVENTANA1_ComboBox_GMT().getSelectedItem();
@@ -829,7 +833,7 @@ public class Controlador implements ActionListener, MouseListener {
                             ciudad = modelo.getLista_Vuelos().get(i).getLista_escalas().get(j).getCiudad();
                             hora_llegada = modelo.getLista_Vuelos().get(i).getLista_escalas().get(j).getHora_llegada();
                             hora_salida = modelo.getLista_Vuelos().get(i).getLista_escalas().get(j).getHora_salida();
-                            Escala = modelo.getLista_Vuelos().get(i).getLista_escalas().get(j).getHora_salida();
+                            Escala = String.valueOf(Math.abs(Integer.parseInt(hora_salida)-Integer.parseInt(hora_llegada)));
 
                             Object[] columna = new Object[ventana2.getModelito().getColumnCount()];
 
