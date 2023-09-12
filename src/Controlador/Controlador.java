@@ -56,8 +56,9 @@ public class Controlador implements ActionListener, MouseListener {
         formato();
 
         ventana.setLocationRelativeTo(null);
-        ventana.setBounds(500, 500, 500, 500);
+       
         ventana.setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
+        ventana2.setDefaultCloseOperation(ventana.EXIT_ON_CLOSE);
         ventana2.setVisible(true);
         ventana.setVisible(true);
     }
