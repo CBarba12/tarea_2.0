@@ -6,17 +6,26 @@ package Controlador;
 
 import vista.*;
 import Modelo.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author alexb
  */
-public class Controlador {
+public class Controlador implements ActionListener,MouseListener{
 
     public static Ventana_1 ventana = new Ventana_1();
     public static Ventana_2 ventana2 = new Ventana_2();
     public static Modelo_Principal modelo = new Modelo_Principal();
+    
+    
+    
+    
+    
 
     public static void mostrar() {
         ventana.setVisible(true);
@@ -43,6 +52,14 @@ public class Controlador {
         String Id = ventana.getVentana1_caja_ID().getText();
         String Nombre = ventana.getVentana1_nombre_CIUDAD().getText();
         String seleccion = (String) ventana.getVENTANA1_ComboBox_GMT().getSelectedItem();
+
+        for (int i = 0; i < modelo.getList_Ciudades().size(); i++) {
+            if (modelo.getList_Ciudades().get(i).getId_Ciudad().equals(Id)) {
+                
+                JOptionPane.showMessageDialog(ventana, "Esta ciudad ya existe!!  Digite otro ID");
+                return;
+            }
+        }
 
         Ciudad generica = new Ciudad(Id, Nombre, seleccion);
         modelo.getList_Ciudades().add(generica);
@@ -98,13 +115,19 @@ public class Controlador {
                 ventana.getVentana1_nombre_CIUDAD().setText(nombre);
                 ventana.getVentana1_caja_ID().setText(id);
 
+                ventana.getVentana1_caja_ID().setEnabled(false);
+                ventana.getVentana1_boton_actualizar().setEnabled(true);
+                ventana.getVentana1_boton_agregar().setEnabled(false);
+
             }
 
         }
     }
 
     public static void actualizar() {
+
         if (ventana.getTabla_ciudad().getSelectedRow() >= 0) {
+
             // Seleccionar una fila existente para editar
             int selectedRow = ventana.getTabla_ciudad().getSelectedRow();
             // Modificar los valores de la fila seleccionada
@@ -117,22 +140,37 @@ public class Controlador {
 
             for (int i = 0; i < modelo.getList_Ciudades().size(); i++) {
                 if (modelo.getList_Ciudades().get(i).getId_Ciudad().equals(ventana.getVentana1_caja_ID().getText())) {
-                    modelo.getList_Ciudades().get(i).setNombre_vuelo(ventana.getVentana1_nombre_CIUDAD().getText());
-                  
-                    
-                    
-                     
-                    
-                    
-                }
-            }
-        }
-    }
-    
-    
-    
-    //------------------------------------------------------------------------------vuelo---------------------------
 
+                    modelo.getList_Ciudades().get(i).setNombre_vuelo(ventana.getVentana1_nombre_CIUDAD().getText());
+                    modelo.getList_Ciudades().get(i).setId_Ciudad(ventana.getVentana1_caja_ID().getText());
+                    modelo.getList_Ciudades().get(i).setGMT(seleccion);
+
+                }
+
+            }
+
+            ventana2.getVentana2_ComboBox1_origen().removeAllItems();
+            ventana2.getVentana2_ComboBox_Destino().removeAllItems();
+            ventana2.getVentana_combox_Escala().removeAllItems();
+
+            for (int i = 0; i < modelo.getList_Ciudades().size(); i++) {
+
+                ventana2.getVentana2_ComboBox1_origen().addItem(modelo.getList_Ciudades().get(i).getNombre_Ciudad() + "(" + modelo.getList_Ciudades().get(i).getGMT() + "gmt)");
+                ventana2.getVentana2_ComboBox_Destino().addItem(modelo.getList_Ciudades().get(i).getNombre_Ciudad() + "(" + modelo.getList_Ciudades().get(i).getGMT() + "gmt)");
+                ventana2.getVentana_combox_Escala().addItem(modelo.getList_Ciudades().get(i).getNombre_Ciudad() + "(" + modelo.getList_Ciudades().get(i).getGMT() + "gmt)");
+
+            }
+
+            ventana.getVentana1_caja_ID().setEnabled(true);
+            ventana.getVentana1_nombre_CIUDAD().setText("");
+            ventana.getVentana1_caja_ID().setText("");
+            ventana.getVentana1_boton_agregar().setEnabled(true);
+
+        }
+        ventana.getTabla_ciudad().clearSelection();
+    }
+
+    //------------------------------------------------------------------------------vuelo---------------------------
     public static void AGREGAR_Vuelo() {
 
         int numeroidentificador;
@@ -146,12 +184,21 @@ public class Controlador {
         int GTMDestino = 0;
         int Duracion;
 
-        
         ventana2.getVentan2_boton_agregar_escala().setEnabled(false);
         ventana2.getVentana2_Tabla_Escalas().setEnabled(false);
-        
-                
+
         numeroidentificador = Integer.parseInt(ventana2.getVentana2_numerode_vuelo().getText());
+        
+        for (int i = 0; i < modelo.getLista_Vuelos().size(); i++) {
+            if (modelo.getLista_Vuelos().get(i).getIdentificador()==(numeroidentificador)) {
+                
+                JOptionPane.showMessageDialog(ventana, "Este vuelo ya existe!!  Digite otro Numero identificador");
+                return;
+            }
+        }
+        
+        
+        
 
         int total = ventana2.getVentana2_ComboBox1_origen().getSelectedIndex();
         int total2 = ventana2.getVentana2_ComboBox_Destino().getSelectedIndex();
@@ -174,7 +221,12 @@ public class Controlador {
         horaSalida = Integer.parseInt((String) ventana2.getVentana2_ComboBox_salida().getSelectedItem());
         hora_llegada = Integer.parseInt((String) ventana2.getVentana2_ComboBox_llegada().getSelectedItem());
 
-        Duracion = (hora_llegada - (GTMDestino)) - (horaSalida - (GTMOrigen));
+        if ((hora_llegada - (GTMDestino)) < (horaSalida - (GTMOrigen))) {
+            Duracion = (24 - (horaSalida - (GTMOrigen))) + (hora_llegada - (GTMDestino));
+
+        } else {
+            Duracion = (hora_llegada - (GTMDestino)) - (horaSalida - (GTMOrigen));
+        }
 
         Object[] columna = new Object[ventana2.getModelito_2().getColumnCount()];
         columna[0] = String.valueOf(numeroidentificador);
@@ -216,9 +268,7 @@ public class Controlador {
             int total2 = ventana2.getVentana2_ComboBox_Destino().getSelectedIndex();
 
             if (total >= 0) {
-                
-                 
-                 
+
                 for (int i = 0; i < modelo.getList_Ciudades().size(); i++) {
                     if (total == i) {
                         Ciudad_Orige = modelo.getList_Ciudades().get(i).getNombre_Ciudad();
@@ -236,34 +286,31 @@ public class Controlador {
             horaSalida = Integer.parseInt((String) ventana2.getVentana2_ComboBox_salida().getSelectedItem());
             hora_llegada = Integer.parseInt((String) ventana2.getVentana2_ComboBox_llegada().getSelectedItem());
 
-            Duracion = (hora_llegada - (GTMDestino)) - (horaSalida - (GTMOrigen));
-            
-            
+            if ((hora_llegada - (GTMDestino)) < (horaSalida - (GTMOrigen))) {
+                Duracion = (24 - (horaSalida - (GTMOrigen))) + (hora_llegada - (GTMDestino));
+
+            } else {
+                Duracion = (hora_llegada - (GTMDestino)) - (horaSalida - (GTMOrigen));
+            }
+
 //             for (int i = 0; i < modelo.getLista_Vuelos().size(); i++) {
 //                if (String.valueOf(modelo.getLista_Vuelos().get(i).getIdentificador()).equals(ventana2.getVentana2_numerode_vuelo().getText())) {
 //                    modelo.getLista_Vuelos().get(i).setIdentificador(Integer.parseInt(ventana2.getVentana2_numerode_vuelo().getText()));
 //                }
 //            }
-             
-
             ventana2.getVentana2_Tabla_Vuelos().setValueAt(String.valueOf(numeroidentificador), selectedRow, 0);
             ventana2.getVentana2_Tabla_Vuelos().setValueAt(Descripcion, selectedRow, 1);
             ventana2.getVentana2_Tabla_Vuelos().setValueAt(String.valueOf(horaSalida), selectedRow, 2);
             ventana2.getVentana2_Tabla_Vuelos().setValueAt(String.valueOf(hora_llegada), selectedRow, 3);
             ventana2.getVentana2_Tabla_Vuelos().setValueAt(String.valueOf(Duracion), selectedRow, 4);
 
-           
-            
-            
-            
-           
-            
         }
 
-        
         ventana2.getVentana2_numerode_vuelo().setEnabled(true);
         ventana2.getVentana2_numerode_vuelo().setText("");
-        
+
+        ventana2.getVentana2_Tabla_Vuelos().clearSelection();
+
     }
 
     public static void AgregarEscala() {
@@ -306,10 +353,12 @@ public class Controlador {
 
                 Object[] columna = new Object[ventana2.getModelito().getColumnCount()];
 
+                int duracion_de_escala = Math.abs(hora_llegada - horaSalida);
+
                 columna[0] = String.valueOf(Ciudad_Orige);
                 columna[1] = String.valueOf(hora_llegada);
                 columna[2] = String.valueOf(horaSalida);
-                columna[3] = String.valueOf(GTMOrigen);
+                columna[3] = String.valueOf(duracion_de_escala);
 
                 ventana2.getModelito().addRow(columna);
                 ventana2.getVentana2_Tabla_Escalas().setModel(ventana2.getModelito());
@@ -327,8 +376,6 @@ public class Controlador {
         String Escala;
 
         if (evt.getClickCount() == 1) { // Detectar un solo clic
-         
-            
 
             ventana2.getModelito().setRowCount(0);
 
@@ -338,22 +385,15 @@ public class Controlador {
                 ventana2.getModelito().removeRow(i);
             }
             ventana2.getVentana2_Tabla_Escalas().setModel(ventana2.getModelito());
-        
+
             int selectedRow = ventana2.getVentana2_Tabla_Vuelos().getSelectedRow();
             if (selectedRow >= 0) {
-                
-        
-                
-                
-                
-                
-                
-         ventana2 .getVentana2_numerode_vuelo().setEnabled(false);
-         ventana2.getVentana2_actualizar_vuelo().setEnabled(true);
-         ventana2.getVentan2_boton_agregar_escala().setEnabled(true);
-         ventana2.getVentana2_Tabla_Escalas().setEnabled(true);
-        
-         
+
+                ventana2.getVentana2_numerode_vuelo().setEnabled(false);
+                ventana2.getVentana2_actualizar_vuelo().setEnabled(true);
+                ventana2.getVentan2_boton_agregar_escala().setEnabled(true);
+                ventana2.getVentana2_Tabla_Escalas().setEnabled(true);
+
                 String numero_vuelo = (String) ventana2.getVentana2_Tabla_Vuelos().getValueAt(selectedRow, 0);
 
                 for (int i = 0; i < modelo.getLista_Vuelos().size(); i++) {
@@ -386,6 +426,36 @@ public class Controlador {
 
         }
 
+    }
+
+    
+    
+    
+    
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+     }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
 }

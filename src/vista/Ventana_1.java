@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import Controlador.*;
+import static Controlador.Controlador.ventana;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Ventana_1 extends javax.swing.JFrame {
     public Ventana_1() {
         initComponents();
         formato();
+        getVentana1_boton_actualizar().setEnabled(false);
     }
   private void formato() {
     String []s={"Id","nombre","Gmt"};
@@ -233,6 +235,11 @@ public class Ventana_1 extends javax.swing.JFrame {
             }
         });
     }
+
+    public JButton getVentana1_boton_agregar() {
+        return Ventana1_boton_agregar;
+    }
+    
     DefaultTableModel modelito = new DefaultTableModel();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Caja1_Bonton_buscar;
@@ -304,6 +311,10 @@ public class Ventana_1 extends javax.swing.JFrame {
 
     public void setTabla_ciudad(JTable Tabla_ciudad) {
         this.Tabla_ciudad = Tabla_ciudad;
+    }
+
+    public JButton getVentana1_boton_actualizar() {
+        return Ventana1_boton_actualizar;
     }
 
  
