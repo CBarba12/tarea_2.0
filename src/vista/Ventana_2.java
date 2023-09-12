@@ -288,25 +288,36 @@ public class Ventana_2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ventana2_agregar_vueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventana2_agregar_vueloActionPerformed
-      Controlador.AGREGAR_Vuelo();
+//      Controlador.AGREGAR_Vuelo();
     }//GEN-LAST:event_ventana2_agregar_vueloActionPerformed
 
+    
     private void ventana2_Tabla_VuelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ventana2_Tabla_VuelosMouseClicked
-      Controlador.tablla_de_vuelo_mouseclic(evt);
+//      Controlador.tablla_de_vuelo_mouseclic(evt);
     }//GEN-LAST:event_ventana2_Tabla_VuelosMouseClicked
 
+    
     private void ventana2_actualizar_vueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventana2_actualizar_vueloActionPerformed
-       Controlador.Actualizar_vuelo();
+//       Controlador.Actualizar_vuelo();
     }//GEN-LAST:event_ventana2_actualizar_vueloActionPerformed
 
     private void ventan2_boton_agregar_escalaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventan2_boton_agregar_escalaActionPerformed
-      Controlador.AgregarEscala();
+//      Controlador.AgregarEscala();
     }//GEN-LAST:event_ventan2_boton_agregar_escalaActionPerformed
 
+    
+    
     private void ventana2_Tabla_EscalasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ventana2_Tabla_EscalasMouseClicked
          
     }//GEN-LAST:event_ventana2_Tabla_EscalasMouseClicked
 
+    
+    
+    
+    
+    
+    
+    
     DefaultTableModel modelito = new DefaultTableModel();
     DefaultTableModel modelito_2 = new DefaultTableModel();
 

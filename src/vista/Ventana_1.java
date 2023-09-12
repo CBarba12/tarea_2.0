@@ -185,21 +185,33 @@ public class Ventana_1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Ventana1_boton_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ventana1_boton_agregarActionPerformed
-        Controlador.AGREGAR_ciudad();
+//        Controlador.AGREGAR_ciudad();
     }//GEN-LAST:event_Ventana1_boton_agregarActionPerformed
 
     private void Ventana1_boton_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ventana1_boton_actualizarActionPerformed
-      Controlador.actualizar();
+//      Controlador.actualizar();
     }//GEN-LAST:event_Ventana1_boton_actualizarActionPerformed
 
     private void Caja1_Bonton_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Caja1_Bonton_buscarActionPerformed
-        Controlador.busqueda_ciudad();
+//        Controlador.busqueda_ciudad();
     }//GEN-LAST:event_Caja1_Bonton_buscarActionPerformed
 
+    
+    
+    
+    
+    
+    
+    
+    
     private void Tabla_ciudadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_ciudadMouseClicked
-       Controlador.Tabla_ciudadMouseClicked(evt);
+//       Controlador.Tabla_ciudadMouseClicked(evt);
     }//GEN-LAST:event_Tabla_ciudadMouseClicked
 
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -240,7 +252,10 @@ public class Ventana_1 extends javax.swing.JFrame {
         return Ventana1_boton_agregar;
     }
     
+    
     DefaultTableModel modelito = new DefaultTableModel();
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Caja1_Bonton_buscar;
     private javax.swing.JTable Tabla_ciudad;
