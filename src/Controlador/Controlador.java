@@ -94,6 +94,8 @@ public class Controlador implements ActionListener, MouseListener {
         ventana.getVENTANA1_ComboBox_GMT().addItem("-3");
         ventana.getVENTANA1_ComboBox_GMT().addItem("-2");
         ventana.getVENTANA1_ComboBox_GMT().addItem("-1");
+         ventana.getVENTANA1_ComboBox_GMT().addItem("1");
+          ventana.getVENTANA1_ComboBox_GMT().addItem("2");
         ventana.getVentana1_boton_actualizar().setEnabled(false);
 
     }
